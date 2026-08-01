@@ -4,12 +4,12 @@
   "private": true,
   "description": "The PseudoGo language: lexer, parser, semantic analyzer, and evaluator. Pure TypeScript, no DOM/UI dependencies.",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
     }
   },
   "scripts": {
