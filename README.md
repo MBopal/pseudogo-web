@@ -17,7 +17,12 @@ the authoritative PseudoGo language specification this interpreter targets.
 - ✅ `packages/lang` — lexer, parser, semantic analyzer, generator-based
   evaluator. 88 tests passing, including 18 golden fixtures verified
   byte-for-byte against real `pseudogo-cli` output.
-- ⏳ `apps/web` — not started yet.
+- ✅ `apps/web` — v1 IDE: CodeMirror editor with live linting, a Web
+  Worker running the interpreter off the main thread, an interactive
+  console with an input queue, cooperative cancellation, localStorage
+  autosave, and URL-based sharing. Not yet deployed; step debugger and
+  backend persistence are deliberately deferred (see
+  `PRD_pseudogo_web.md`, "Out of Scope").
 
 ## Repository structure
 
@@ -36,7 +41,17 @@ pseudogo-web/
 │           ├── errors/       Shared PseudoError type
 │           ├── fixtures/     Golden fixtures + parity tests vs. pseudogo-cli
 │           └── index.ts      Public API
-├── apps/                     (future) the React web IDE
+├── apps/
+│   └── web/                  The React IDE
+│       └── src/
+│           ├── components/   Editor (CodeMirror), Console, ui/ (Button, etc.)
+│           ├── lib/
+│           │   ├── codemirror/   PseudoGo syntax highlighting, theme, live-lint
+│           │   ├── persistence.ts  localStorage autosave + URL sharing
+│           │   └── defaultProgram.ts
+│           ├── worker/       Execution Web Worker + message protocol
+│           ├── hooks/        useInterpreter (owns the Worker's lifecycle)
+│           └── App.tsx
 ├── PRD_pseudogo_web.md        This project's PRD
 ├── PRD_pseudogo_cli.md        The PseudoGo language spec (source of truth)
 └── .github/workflows/ci.yml   Required CI: typecheck + test + build
@@ -52,6 +67,22 @@ pnpm test        # run every package's test suite
 pnpm typecheck    # typecheck every package
 pnpm build        # build every package
 ```
+
+## Running the web app
+
+```bash
+pnpm --filter @pseudogo/web dev
+```
+
+Opens the IDE at `http://localhost:5173`. A note on verification: this app
+was built and tested in a sandboxed environment without a real browser
+available, so while every piece typechecks strictly and the production
+build succeeds (including the Worker splitting into its own chunk, and a
+direct round-trip test of the URL-sharing encoding), the actual UI has not
+been visually verified or clicked through. Worth specifically checking
+after `pnpm dev`: Run/Stop, an `INPUT`-driven program (try the default
+starter program, which prompts for your name), live-linting squiggles on
+a deliberately broken program, and the Share button's clipboard copy.
 
 ## Using the interpreter
 
