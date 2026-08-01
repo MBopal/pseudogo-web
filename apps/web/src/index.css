@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+ * PseudoGo's "chalkboard" theme -- pseudocode's natural home is a
+ * chalkboard, sitting between prose and real code. Deliberately not the
+ * cream+terracotta or near-black+neon defaults.
+ */
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-app: #1a211d;
+  --color-panel: #212925;
+  --color-panel-raised: #283029;
+  --color-inset: #191f1b;
+
+  --color-ink: #f3efe3;
+  --color-muted: #9aa79c;
+  --color-faint: #62705f;
+
+  --color-accent: #e3b23c;
+  --color-accent-soft: #4a4433;
+  --color-accent-fg: #1a211d;
+
+  --color-success: #8fbf8a;
+  --color-success-soft: #2b3a2a;
+  --color-danger: #e5484d;
+  --color-danger-soft: #402424;
+
+  --color-border: #33403a;
+  --color-border-soft: #283029;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--color-app);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+
+  /* Visible keyboard focus everywhere, styled with the accent rather than
+     the browser default blue -- accessibility floor, not decoration. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
