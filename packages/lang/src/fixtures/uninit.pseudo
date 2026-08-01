@@ -1,0 +1,6 @@
+Program Uninit
+Dictionary
+	a: Integer
+Algorithm
+	OUTPUT a
+Endprogram

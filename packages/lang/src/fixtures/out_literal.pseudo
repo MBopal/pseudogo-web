@@ -1,0 +1,16 @@
+procedure swap(in/out a, b: Integer)
+Dictionary
+	temp: Integer
+Algorithm
+	temp = a
+	a = b
+	b = temp
+Endprocedure
+
+Program Main
+Dictionary
+	x: Integer
+Algorithm
+	x = 5
+	swap(x, 10)
+Endprogram

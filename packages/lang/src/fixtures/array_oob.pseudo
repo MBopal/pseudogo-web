@@ -1,0 +1,8 @@
+Program ArrayOOB
+Dictionary
+	arr: Array[1..10] of Integer
+	x: Integer
+Algorithm
+	x = arr[0]
+	OUTPUT x
+Endprogram

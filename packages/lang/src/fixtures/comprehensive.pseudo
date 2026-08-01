@@ -1,0 +1,66 @@
+-- This program exercises WHILE, ELSE IF, NOT/AND/OR, MOD, comments, nested arrays/structs.
+type Point struct <
+	x: Integer
+	y: Integer
+>
+
+/* Block comment
+   spanning multiple lines */
+function classify(n: Integer) -> String
+Dictionary
+	label: String
+Algorithm
+	IF n MOD 2 == 0 AND n > 0 THEN
+		label = "positive even"
+	ELSE IF n MOD 2 != 0 THEN
+		label = "odd-ish"
+	ELSE
+		label = "other"
+	ENDIF
+	return label
+Endfunction
+
+procedure resetOut(out z: Integer)
+Dictionary
+Algorithm
+	z = 99
+Endprocedure
+
+Program Comprehensive
+Dictionary
+	i, count: Integer
+	grid: Array[1..2] of Array[1..2] of Integer
+	origin: Point
+	flag: Boolean
+	junk: Integer
+Algorithm
+	count = 0
+	i = 1
+	WHILE i <= 5
+		IF NOT (i == 3) THEN
+			count = count + 1
+		ENDIF
+		i = i + 1
+	ENDWHILE
+	OUTPUT "count:", count
+
+	grid[1][1] = 10
+	grid[1][2] = 20
+	grid[2][1] = 30
+	grid[2][2] = 40
+	OUTPUT grid[1][1] + grid[2][2]
+
+	origin.x = 7
+	origin.y = 8
+	OUTPUT origin.x, origin.y
+
+	flag = (5 > 3) OR (2 > 10)
+	OUTPUT flag
+
+	OUTPUT classify(4)
+	OUTPUT classify(7)
+
+	junk = 123
+	resetOut(junk)
+	OUTPUT junk
+Endprogram

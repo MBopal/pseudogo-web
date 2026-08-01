@@ -1,0 +1,12 @@
+Program ArrayDemo
+Dictionary
+	i: Integer
+	nums: Array[1..5] of Integer
+Algorithm
+	FOR i = 1 TO 5
+		nums[i] = i * 2
+	ENDFOR
+	FOR i = 1 TO 5
+		OUTPUT nums[i]
+	ENDFOR
+Endprogram

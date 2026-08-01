@@ -1,0 +1,6 @@
+Program Bad
+Dictionary
+	x: Integer
+Algorithm
+	x = 5 $ 3
+Endprogram

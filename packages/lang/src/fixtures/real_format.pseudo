@@ -1,0 +1,11 @@
+Program RealFmt
+Dictionary
+	r1, r2, r3: Real
+Algorithm
+	r1 = 5.0
+	r2 = 3.14159
+	r3 = 10 / 4.0
+	OUTPUT r1
+	OUTPUT r2
+	OUTPUT r3
+Endprogram

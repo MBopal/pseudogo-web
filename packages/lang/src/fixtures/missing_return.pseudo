@@ -1,0 +1,15 @@
+function foo(n: Integer) -> Integer
+Dictionary
+Algorithm
+	IF n > 0 THEN
+		return 1
+	ENDIF
+Endfunction
+
+Program Main
+Dictionary
+	r: Integer
+Algorithm
+	r = foo(5)
+	OUTPUT r
+Endprogram

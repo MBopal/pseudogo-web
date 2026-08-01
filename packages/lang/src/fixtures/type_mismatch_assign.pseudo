@@ -1,0 +1,6 @@
+Program TypeMismatch
+Dictionary
+	y: Integer
+Algorithm
+	y = "hello"
+Endprogram

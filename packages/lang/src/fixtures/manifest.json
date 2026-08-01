@@ -1,0 +1,182 @@
+[
+  {
+    "name": "array_demo.pseudo",
+    "sourceFile": "array_demo.pseudo",
+    "stdin": "",
+    "stdout": "2\n4\n6\n8\n10\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "bubble_sort.pseudo",
+    "sourceFile": "bubble_sort.pseudo",
+    "stdin": "",
+    "stdout": "First: 20\nLast: 99998\nSorted check (should be 1 for sorted):\n1\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": false
+  },
+  {
+    "name": "factorial.pseudo",
+    "sourceFile": "factorial.pseudo",
+    "stdin": "",
+    "stdout": "120\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "greet.pseudo",
+    "sourceFile": "greet.pseudo",
+    "stdin": "Ada\n",
+    "stdout": "? Hello, Ada\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "hello.pseudo",
+    "sourceFile": "hello.pseudo",
+    "stdin": "",
+    "stdout": "Hello, world!\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "oops.pseudo",
+    "sourceFile": "oops.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Compile error: Line 4: Variable 'x' not declared in this scope\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "struct_test.pseudo",
+    "sourceFile": "struct_test.pseudo",
+    "stdin": "",
+    "stdout": "5.5\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "swap.pseudo",
+    "sourceFile": "swap.pseudo",
+    "stdin": "",
+    "stdout": "20 10\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "array_oob.pseudo",
+    "sourceFile": "array_oob.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Runtime error: Line 6: Array index 0 is out of bounds (1..10)\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "comprehensive.pseudo",
+    "sourceFile": "comprehensive.pseudo",
+    "stdin": "",
+    "stdout": "count: 4\n50\n7 8\ntrue\npositive even\nodd-ish\n99\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "div_zero.pseudo",
+    "sourceFile": "div_zero.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Runtime error: Line 7: Division by zero\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "in_by_value.pseudo",
+    "sourceFile": "in_by_value.pseudo",
+    "stdin": "",
+    "stdout": "5\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "lex_error.pseudo",
+    "sourceFile": "lex_error.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Lexical error: Line 5: Unexpected character '$'\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "missing_return.pseudo",
+    "sourceFile": "missing_return.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Compile error: Line 1: Not all paths in function 'foo' return a value\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "out_literal.pseudo",
+    "sourceFile": "out_literal.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Compile error: Line 15: Argument 2 must be a variable (passed as in/out)\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "real_format.pseudo",
+    "sourceFile": "real_format.pseudo",
+    "stdin": "",
+    "stdout": "5.0\n3.14159\n2.5\nExecution finished.\n",
+    "stderr": "",
+    "exitCode": 0,
+    "compare": true
+  },
+  {
+    "name": "recursion_limit.pseudo",
+    "sourceFile": "recursion_limit.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Runtime error: Line 4: Recursion limit (10000) exceeded\n",
+    "exitCode": 1,
+    "compare": false
+  },
+  {
+    "name": "type_mismatch_assign.pseudo",
+    "sourceFile": "type_mismatch_assign.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Compile error: Line 5: Cannot assign String to Integer variable 'y'\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "uninit.pseudo",
+    "sourceFile": "uninit.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Runtime error: Line 5: Variable 'a' used before assignment\n",
+    "exitCode": 1,
+    "compare": true
+  },
+  {
+    "name": "wrong_arg_count.pseudo",
+    "sourceFile": "wrong_arg_count.pseudo",
+    "stdin": "",
+    "stdout": "",
+    "stderr": "Compile error: Line 14: Procedure 'swap' expects 2 arguments, got 3\n",
+    "exitCode": 1,
+    "compare": true
+  }
+]

@@ -1,0 +1,9 @@
+Program DivZero
+Dictionary
+	a, b, c: Integer
+Algorithm
+	a = 10
+	b = 0
+	c = a / b
+	OUTPUT c
+Endprogram
