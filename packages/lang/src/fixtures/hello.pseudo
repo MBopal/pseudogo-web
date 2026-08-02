@@ -1,7 +1,7 @@
-Program Hello
-Dictionary
-	message: String
-Algorithm
+PROGRAM Hello
+DICTIONARY
+	message: STRING
+ALGORITHM
 	message = "Hello, world!"
 	OUTPUT message
-Endprogram
+ENDPROGRAM

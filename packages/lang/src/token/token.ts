@@ -70,45 +70,52 @@ export type TokenType =
   | "DOT"
   | "ARROW";
 
+// Keyword lookup is case-insensitive: "Program", "PROGRAM", and "program"
+// all resolve to the same token type. The canonical *display* form (see
+// displayNames below) is uppercase for structural keywords and type names,
+// but stays lowercase for true/false, matching the common convention of
+// keeping boolean literals lowercase even in otherwise uppercase-keyword
+// languages.
 const keywords: Record<string, TokenType> = {
-  Program: "PROGRAM",
-  Dictionary: "DICTIONARY",
-  Algorithm: "ALGORITHM",
-  Endprogram: "ENDPROGRAM",
+  program: "PROGRAM",
+  dictionary: "DICTIONARY",
+  algorithm: "ALGORITHM",
+  endprogram: "ENDPROGRAM",
   function: "FUNCTION",
-  Endfunction: "ENDFUNCTION",
+  endfunction: "ENDFUNCTION",
   procedure: "PROCEDURE",
-  Endprocedure: "ENDPROCEDURE",
+  endprocedure: "ENDPROCEDURE",
   return: "RETURN",
-  IF: "IF",
-  THEN: "THEN",
-  ELSE: "ELSE",
-  ENDIF: "ENDIF",
-  FOR: "FOR",
-  TO: "TO",
-  STEP: "STEP",
-  ENDFOR: "ENDFOR",
-  WHILE: "WHILE",
-  ENDWHILE: "ENDWHILE",
-  INPUT: "INPUT",
-  OUTPUT: "OUTPUT",
+  if: "IF",
+  then: "THEN",
+  else: "ELSE",
+  endif: "ENDIF",
+  for: "FOR",
+  to: "TO",
+  step: "STEP",
+  endfor: "ENDFOR",
+  while: "WHILE",
+  endwhile: "ENDWHILE",
+  input: "INPUT",
+  output: "OUTPUT",
   type: "TYPE",
   struct: "STRUCT",
-  Array: "ARRAY",
+  array: "ARRAY",
   of: "OF",
   in: "IN",
   out: "OUT",
-  AND: "AND",
-  OR: "OR",
-  NOT: "NOT",
-  MOD: "MOD",
+  and: "AND",
+  or: "OR",
+  not: "NOT",
+  mod: "MOD",
   true: "TRUE_LIT",
   false: "FALSE_LIT",
 };
 
-/** Returns the keyword TokenType for an identifier's text, or IDENT. */
+/** Returns the keyword TokenType for an identifier's text (matched
+ * case-insensitively), or IDENT if the text is not a reserved word. */
 export function lookupIdent(ident: string): TokenType {
-  return keywords[ident] ?? "IDENT";
+  return keywords[ident.toLowerCase()] ?? "IDENT";
 }
 
 export interface Pos {
@@ -143,9 +150,28 @@ const displayNames: Partial<Record<TokenType, string>> = {
   COLON: ":",
   DOT: ".",
   ARROW: "->",
-  IN: "in",
-  OUT: "out",
-  INOUT: "in/out",
+  PROGRAM: "PROGRAM",
+  DICTIONARY: "DICTIONARY",
+  ALGORITHM: "ALGORITHM",
+  ENDPROGRAM: "ENDPROGRAM",
+  FUNCTION: "FUNCTION",
+  ENDFUNCTION: "ENDFUNCTION",
+  PROCEDURE: "PROCEDURE",
+  ENDPROCEDURE: "ENDPROCEDURE",
+  RETURN: "RETURN",
+  TYPE: "TYPE",
+  STRUCT: "STRUCT",
+  ARRAY: "ARRAY",
+  OF: "OF",
+  IN: "IN",
+  OUT: "OUT",
+  INOUT: "IN/OUT",
+  AND: "AND",
+  OR: "OR",
+  NOT: "NOT",
+  MOD: "MOD",
+  TRUE_LIT: "true",
+  FALSE_LIT: "false",
 };
 
 /** Human-readable display form of a token type, for parser error messages. */

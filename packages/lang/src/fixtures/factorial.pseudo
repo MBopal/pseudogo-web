@@ -1,16 +1,16 @@
-function factorial(n: Integer) -> Integer
-Dictionary
-Algorithm
+FUNCTION factorial(n: INTEGER) -> INTEGER
+DICTIONARY
+ALGORITHM
 	IF n <= 1 THEN
-		return 1
+		RETURN 1
 	ENDIF
-	return n * factorial(n - 1)
-Endfunction
+	RETURN n * factorial(n - 1)
+ENDFUNCTION
 
-Program Calc
-Dictionary
-	f: Integer
-Algorithm
+PROGRAM Calc
+DICTIONARY
+	f: INTEGER
+ALGORITHM
 	f = factorial(5)
 	OUTPUT f
-Endprogram
+ENDPROGRAM

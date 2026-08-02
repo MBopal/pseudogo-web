@@ -1,6 +1,6 @@
-Program Bad
-Dictionary
-	x: Integer
-Algorithm
+PROGRAM Bad
+DICTIONARY
+	x: INTEGER
+ALGORITHM
 	x = 5 $ 3
-Endprogram
+ENDPROGRAM

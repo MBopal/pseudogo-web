@@ -135,11 +135,11 @@ class Analyzer {
 
       case "IfNode": {
         const cond = this.checkExpr(s.cond, sc);
-        if (!isPrimitive(cond, "Boolean")) fail(s.line, `IF condition must be a Boolean expression, got ${typeName(cond)}`);
+        if (!isPrimitive(cond, "BOOLEAN")) fail(s.line, `IF condition must be a Boolean expression, got ${typeName(cond)}`);
         let allReturn = this.checkStmts(s.then, sc, ctx);
         for (const ei of s.elseIfs) {
           const c = this.checkExpr(ei.cond, sc);
-          if (!isPrimitive(c, "Boolean")) fail(ei.line, `ELSE IF condition must be a Boolean expression, got ${typeName(c)}`);
+          if (!isPrimitive(c, "BOOLEAN")) fail(ei.line, `ELSE IF condition must be a Boolean expression, got ${typeName(c)}`);
           if (!this.checkStmts(ei.body, sc, ctx)) allReturn = false;
         }
         if (s.elseBody !== undefined) {
@@ -153,14 +153,14 @@ class Analyzer {
       case "ForNode": {
         const t = sc.get(s.varName);
         if (t === undefined) fail(s.line, `Variable '${s.varName}' not declared in this scope`);
-        if (!isPrimitive(t, "Integer")) fail(s.line, `FOR loop variable '${s.varName}' must be an Integer`);
+        if (!isPrimitive(t, "INTEGER")) fail(s.line, `FOR loop variable '${s.varName}' must be an Integer`);
         const st = this.checkExpr(s.start, sc);
-        if (!isPrimitive(st, "Integer")) fail(s.line, `FOR start value must be an Integer, got ${typeName(st)}`);
+        if (!isPrimitive(st, "INTEGER")) fail(s.line, `FOR start value must be an Integer, got ${typeName(st)}`);
         const et = this.checkExpr(s.end, sc);
-        if (!isPrimitive(et, "Integer")) fail(s.line, `FOR end value must be an Integer, got ${typeName(et)}`);
+        if (!isPrimitive(et, "INTEGER")) fail(s.line, `FOR end value must be an Integer, got ${typeName(et)}`);
         if (s.step !== undefined) {
           const stp = this.checkExpr(s.step, sc);
-          if (!isPrimitive(stp, "Integer")) fail(s.line, `FOR step value must be an Integer, got ${typeName(stp)}`);
+          if (!isPrimitive(stp, "INTEGER")) fail(s.line, `FOR step value must be an Integer, got ${typeName(stp)}`);
         }
         this.checkStmts(s.body, sc, ctx);
         return false;
@@ -168,7 +168,7 @@ class Analyzer {
 
       case "WhileNode": {
         const c = this.checkExpr(s.cond, sc);
-        if (!isPrimitive(c, "Boolean")) fail(s.line, `WHILE condition must be a Boolean expression, got ${typeName(c)}`);
+        if (!isPrimitive(c, "BOOLEAN")) fail(s.line, `WHILE condition must be a Boolean expression, got ${typeName(c)}`);
         this.checkStmts(s.body, sc, ctx);
         return false;
       }
@@ -235,15 +235,15 @@ class Analyzer {
       case "LiteralExpr":
         switch (e.litKind) {
           case "Int":
-            return { kind: "PrimitiveType", name: "Integer", line: e.line };
+            return { kind: "PrimitiveType", name: "INTEGER", line: e.line };
           case "Real":
-            return { kind: "PrimitiveType", name: "Real", line: e.line };
+            return { kind: "PrimitiveType", name: "REAL", line: e.line };
           case "String":
-            return { kind: "PrimitiveType", name: "String", line: e.line };
+            return { kind: "PrimitiveType", name: "STRING", line: e.line };
           case "Char":
-            return { kind: "PrimitiveType", name: "Char", line: e.line };
+            return { kind: "PrimitiveType", name: "CHAR", line: e.line };
           case "Bool":
-            return { kind: "PrimitiveType", name: "Boolean", line: e.line };
+            return { kind: "PrimitiveType", name: "BOOLEAN", line: e.line };
         }
         break;
 
@@ -257,7 +257,7 @@ class Analyzer {
         const arrType = this.checkExpr(e.array, sc);
         if (arrType.kind !== "ArrayType") fail(e.line, `${exprDesc(e.array)} is not an array`);
         const idxType = this.checkExpr(e.index, sc);
-        if (!isPrimitive(idxType, "Integer")) fail(e.line, `Array index must be an Integer expression, got ${typeName(idxType)}`);
+        if (!isPrimitive(idxType, "INTEGER")) fail(e.line, `Array index must be an Integer expression, got ${typeName(idxType)}`);
         return arrType.elem;
       }
 
@@ -283,8 +283,8 @@ class Analyzer {
       case "UnaryExpr": {
         const operand = this.checkExpr(e.operand, sc);
         if (e.op === "NOT") {
-          if (!isPrimitive(operand, "Boolean")) fail(e.line, `'NOT' requires a Boolean operand, got ${typeName(operand)}`);
-          return { kind: "PrimitiveType", name: "Boolean", line: e.line };
+          if (!isPrimitive(operand, "BOOLEAN")) fail(e.line, `'NOT' requires a Boolean operand, got ${typeName(operand)}`);
+          return { kind: "PrimitiveType", name: "BOOLEAN", line: e.line };
         }
         // unary MINUS
         if (!isNumeric(operand)) fail(e.line, `Unary '-' requires a numeric operand, got ${typeName(operand)}`);
@@ -303,17 +303,17 @@ class Analyzer {
     switch (e.op) {
       case "AND":
       case "OR":
-        if (!isPrimitive(lt, "Boolean") || !isPrimitive(rt, "Boolean")) {
+        if (!isPrimitive(lt, "BOOLEAN") || !isPrimitive(rt, "BOOLEAN")) {
           fail(e.line, `Cannot apply '${e.op}' to ${typeName(lt)} and ${typeName(rt)}`);
         }
-        return { kind: "PrimitiveType", name: "Boolean", line: e.line };
+        return { kind: "PrimitiveType", name: "BOOLEAN", line: e.line };
 
       case "EQ":
       case "NEQ":
         if (!(typesEqual(lt, rt) || (isNumeric(lt) && isNumeric(rt)))) {
           fail(e.line, `Cannot compare ${typeName(lt)} and ${typeName(rt)}`);
         }
-        return { kind: "PrimitiveType", name: "Boolean", line: e.line };
+        return { kind: "PrimitiveType", name: "BOOLEAN", line: e.line };
 
       case "LT":
       case "GT":
@@ -322,7 +322,7 @@ class Analyzer {
         if (!isNumeric(lt) || !isNumeric(rt)) {
           fail(e.line, `Cannot compare ${typeName(lt)} and ${typeName(rt)}`);
         }
-        return { kind: "PrimitiveType", name: "Boolean", line: e.line };
+        return { kind: "PrimitiveType", name: "BOOLEAN", line: e.line };
 
       case "PLUS":
       case "MINUS":
@@ -331,16 +331,16 @@ class Analyzer {
         if (!isNumeric(lt) || !isNumeric(rt)) {
           fail(e.line, `Cannot apply operator '${opSymbol(e.op)}' to ${typeName(lt)} and ${typeName(rt)}`);
         }
-        if (isPrimitive(lt, "Real") || isPrimitive(rt, "Real")) {
-          return { kind: "PrimitiveType", name: "Real", line: e.line };
+        if (isPrimitive(lt, "REAL") || isPrimitive(rt, "REAL")) {
+          return { kind: "PrimitiveType", name: "REAL", line: e.line };
         }
-        return { kind: "PrimitiveType", name: "Integer", line: e.line };
+        return { kind: "PrimitiveType", name: "INTEGER", line: e.line };
 
       case "MOD":
-        if (!isPrimitive(lt, "Integer") || !isPrimitive(rt, "Integer")) {
+        if (!isPrimitive(lt, "INTEGER") || !isPrimitive(rt, "INTEGER")) {
           fail(e.line, `'MOD' requires Integer operands, got ${typeName(lt)} and ${typeName(rt)}`);
         }
-        return { kind: "PrimitiveType", name: "Integer", line: e.line };
+        return { kind: "PrimitiveType", name: "INTEGER", line: e.line };
     }
   }
 }
@@ -381,7 +381,7 @@ function isPrimitive(t: ast.TypeExpr, name: ast.PrimitiveType["name"]): boolean 
 }
 
 function isNumeric(t: ast.TypeExpr): boolean {
-  return isPrimitive(t, "Integer") || isPrimitive(t, "Real");
+  return isPrimitive(t, "INTEGER") || isPrimitive(t, "REAL");
 }
 
 /** Integer -> Real widening is allowed only when allowWidening is true (used
@@ -390,7 +390,7 @@ function isNumeric(t: ast.TypeExpr): boolean {
  * the caller's storage). */
 function isAssignable(from: ast.TypeExpr, to: ast.TypeExpr, allowWidening: boolean): boolean {
   if (typesEqual(from, to)) return true;
-  if (allowWidening && isPrimitive(from, "Integer") && isPrimitive(to, "Real")) return true;
+  if (allowWidening && isPrimitive(from, "INTEGER") && isPrimitive(to, "REAL")) return true;
   return false;
 }
 

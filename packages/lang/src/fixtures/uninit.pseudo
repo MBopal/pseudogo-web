@@ -1,6 +1,6 @@
-Program Uninit
-Dictionary
-	a: Integer
-Algorithm
+PROGRAM Uninit
+DICTIONARY
+	a: INTEGER
+ALGORITHM
 	OUTPUT a
-Endprogram
+ENDPROGRAM

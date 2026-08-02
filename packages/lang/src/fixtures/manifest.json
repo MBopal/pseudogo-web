@@ -157,7 +157,7 @@
     "sourceFile": "type_mismatch_assign.pseudo",
     "stdin": "",
     "stdout": "",
-    "stderr": "Compile error: Line 5: Cannot assign String to Integer variable 'y'\n",
+    "stderr": "Compile error: Line 5: Cannot assign STRING to INTEGER variable 'y'\n",
     "exitCode": 1,
     "compare": true
   },

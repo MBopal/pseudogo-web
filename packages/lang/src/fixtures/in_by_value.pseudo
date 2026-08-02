@@ -1,14 +1,14 @@
-procedure tryModify(in a: Integer)
-Dictionary
-Algorithm
+PROCEDURE tryModify(IN a: INTEGER)
+DICTIONARY
+ALGORITHM
 	a = 999
-Endprocedure
+ENDPROCEDURE
 
-Program Main
-Dictionary
-	x: Integer
-Algorithm
+PROGRAM Main
+DICTIONARY
+	x: INTEGER
+ALGORITHM
 	x = 5
 	tryModify(x)
 	OUTPUT x
-Endprogram
+ENDPROGRAM
