@@ -17,6 +17,13 @@ function isDigit(ch: string | null): boolean {
   return ch >= "0" && ch <= "9";
 }
 
+// ASCII-lowercases a single character; used only for the case-insensitive
+// "in/out" lookahead, where the input is always ASCII.
+function lowerChar(ch: string | null): string | null {
+  if (ch === null) return null;
+  return ch >= "A" && ch <= "Z" ? String.fromCharCode(ch.charCodeAt(0) + 32) : ch;
+}
+
 export class Lexer {
   private readonly input: string;
   private pos = 0;
@@ -164,17 +171,18 @@ export class Lexer {
     const lit = this.input.slice(start, this.pos);
 
     // Special case: "in/out" parameter mode is a single logical token.
+    // Matched case-insensitively, like every other keyword.
     if (
-      lit === "in" &&
+      lit.toLowerCase() === "in" &&
       this.curCh() === "/" &&
-      this.peekChar() === "o" &&
-      this.peekAt(1) === "u" &&
-      this.peekAt(2) === "t"
+      lowerChar(this.peekChar()) === "o" &&
+      lowerChar(this.peekAt(1)) === "u" &&
+      lowerChar(this.peekAt(2)) === "t"
     ) {
       this.readChar(); // '/'
-      this.readChar(); // 'o'
-      this.readChar(); // 'u'
-      this.readChar(); // 't'
+      this.readChar(); // 'o'/'O'
+      this.readChar(); // 'u'/'U'
+      this.readChar(); // 't'/'T'
       return this.makeTok("INOUT", "in/out", line, col);
     }
 

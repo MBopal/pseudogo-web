@@ -1,6 +1,6 @@
-Program TypeMismatch
-Dictionary
-	y: Integer
-Algorithm
+PROGRAM TypeMismatch
+DICTIONARY
+	y: INTEGER
+ALGORITHM
 	y = "hello"
-Endprogram
+ENDPROGRAM

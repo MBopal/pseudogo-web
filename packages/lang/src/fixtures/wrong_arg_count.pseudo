@@ -1,15 +1,15 @@
-procedure swap(in/out a, b: Integer)
-Dictionary
-	temp: Integer
-Algorithm
+PROCEDURE swap(IN/OUT a, b: INTEGER)
+DICTIONARY
+	temp: INTEGER
+ALGORITHM
 	temp = a
 	a = b
 	b = temp
-Endprocedure
+ENDPROCEDURE
 
-Program Main
-Dictionary
-	x, y, z: Integer
-Algorithm
+PROGRAM Main
+DICTIONARY
+	x, y, z: INTEGER
+ALGORITHM
 	swap(x, y, z)
-Endprogram
+ENDPROGRAM

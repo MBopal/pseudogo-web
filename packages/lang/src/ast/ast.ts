@@ -12,7 +12,7 @@ export type TypeExpr = PrimitiveType | ArrayType | StructType;
 
 export interface PrimitiveType {
   kind: "PrimitiveType";
-  name: "Integer" | "Real" | "Boolean" | "Char" | "String";
+  name: "INTEGER" | "REAL" | "BOOLEAN" | "CHAR" | "STRING";
   line: number;
 }
 

@@ -11,19 +11,23 @@
 import { StreamLanguage, type StreamParser } from "@codemirror/language";
 import { tags as t } from "@lezer/highlight";
 
+// Canonical (uppercase) spellings, matched case-insensitively below --
+// mirrors @pseudogo/lang's actual case-insensitive keyword recognition
+// (PRD_pseudogo_cli.md section 5.1.1). true/false stay lowercase, matching
+// the interpreter's one deliberate exception to the uppercase convention.
 const KEYWORDS = new Set([
-  "Program", "Dictionary", "Algorithm", "Endprogram",
-  "function", "Endfunction", "procedure", "Endprocedure", "return",
+  "PROGRAM", "DICTIONARY", "ALGORITHM", "ENDPROGRAM",
+  "FUNCTION", "ENDFUNCTION", "PROCEDURE", "ENDPROCEDURE", "RETURN",
   "IF", "THEN", "ELSE", "ENDIF",
   "FOR", "TO", "STEP", "ENDFOR",
   "WHILE", "ENDWHILE",
   "INPUT", "OUTPUT",
-  "type", "struct", "Array", "of",
-  "in", "out",
+  "TYPE", "STRUCT", "ARRAY", "OF",
+  "IN", "OUT",
   "AND", "OR", "NOT", "MOD",
 ]);
 
-const TYPE_NAMES = new Set(["Integer", "Real", "Boolean", "Char", "String"]);
+const TYPE_NAMES = new Set(["INTEGER", "REAL", "BOOLEAN", "CHAR", "STRING"]);
 const BOOL_LITERALS = new Set(["true", "false"]);
 
 interface State {
@@ -89,17 +93,18 @@ const pseudoGoStreamParser: StreamParser<State> = {
       return "number";
     }
 
-    // in/out is a single logical token in the real lexer; match it first.
-    if (stream.match(/^in\/out\b/)) {
+    // in/out is a single logical token in the real lexer; match it first,
+    // case-insensitively.
+    if (stream.match(/^in\/out\b/i)) {
       return "keyword";
     }
 
     // Identifiers / keywords / types / booleans
     if (stream.match(/^[A-Za-z_][A-Za-z0-9_]*/)) {
       const word = stream.current();
-      if (KEYWORDS.has(word)) return "keyword";
-      if (TYPE_NAMES.has(word)) return "typeName";
-      if (BOOL_LITERALS.has(word)) return "bool";
+      if (KEYWORDS.has(word.toUpperCase())) return "keyword";
+      if (TYPE_NAMES.has(word.toUpperCase())) return "typeName";
+      if (BOOL_LITERALS.has(word.toLowerCase())) return "bool";
       // Heuristic only (for color, not correctness): a capitalized
       // identifier followed by '(' reads as a call-ish name; we don't
       // actually know function vs. struct vs. variable without the real

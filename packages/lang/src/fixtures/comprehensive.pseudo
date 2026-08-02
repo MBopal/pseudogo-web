@@ -1,15 +1,15 @@
 -- This program exercises WHILE, ELSE IF, NOT/AND/OR, MOD, comments, nested arrays/structs.
-type Point struct <
-	x: Integer
-	y: Integer
+TYPE Point STRUCT <
+	x: INTEGER
+	y: INTEGER
 >
 
 /* Block comment
    spanning multiple lines */
-function classify(n: Integer) -> String
-Dictionary
-	label: String
-Algorithm
+FUNCTION classify(n: INTEGER) -> STRING
+DICTIONARY
+	label: STRING
+ALGORITHM
 	IF n MOD 2 == 0 AND n > 0 THEN
 		label = "positive even"
 	ELSE IF n MOD 2 != 0 THEN
@@ -17,23 +17,23 @@ Algorithm
 	ELSE
 		label = "other"
 	ENDIF
-	return label
-Endfunction
+	RETURN label
+ENDFUNCTION
 
-procedure resetOut(out z: Integer)
-Dictionary
-Algorithm
+PROCEDURE resetOut(OUT z: INTEGER)
+DICTIONARY
+ALGORITHM
 	z = 99
-Endprocedure
+ENDPROCEDURE
 
-Program Comprehensive
-Dictionary
-	i, count: Integer
-	grid: Array[1..2] of Array[1..2] of Integer
+PROGRAM Comprehensive
+DICTIONARY
+	i, count: INTEGER
+	grid: ARRAY[1..2] OF ARRAY[1..2] OF INTEGER
 	origin: Point
-	flag: Boolean
-	junk: Integer
-Algorithm
+	flag: BOOLEAN
+	junk: INTEGER
+ALGORITHM
 	count = 0
 	i = 1
 	WHILE i <= 5
@@ -63,4 +63,4 @@ Algorithm
 	junk = 123
 	resetOut(junk)
 	OUTPUT junk
-Endprogram
+ENDPROGRAM

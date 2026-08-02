@@ -1,13 +1,13 @@
-function loopy(n: Integer) -> Integer
-Dictionary
-Algorithm
-	return loopy(n + 1)
-Endfunction
+FUNCTION loopy(n: INTEGER) -> INTEGER
+DICTIONARY
+ALGORITHM
+	RETURN loopy(n + 1)
+ENDFUNCTION
 
-Program Main
-Dictionary
-	r: Integer
-Algorithm
+PROGRAM Main
+DICTIONARY
+	r: INTEGER
+ALGORITHM
 	r = loopy(0)
 	OUTPUT r
-Endprogram
+ENDPROGRAM

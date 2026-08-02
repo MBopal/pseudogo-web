@@ -1,13 +1,13 @@
-type Point struct <
-	x: Real
-	y: Real
+TYPE Point STRUCT <
+	x: REAL
+	y: REAL
 >
 
-Program StructTest
-Dictionary
+PROGRAM StructTest
+DICTIONARY
 	p: Point
-Algorithm
+ALGORITHM
 	p.x = 3.5
 	p.y = 2.0
 	OUTPUT p.x + p.y
-Endprogram
+ENDPROGRAM

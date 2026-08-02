@@ -77,4 +77,33 @@ describe("lexer", () => {
   it("throws a lexical error on an unterminated string", () => {
     expect(() => tokenize(`x = "unterminated`)).toThrow(/Unterminated string/);
   });
+
+  it("matches keywords case-insensitively", () => {
+    for (const v of ["Program", "PROGRAM", "program", "PrOgRaM"]) {
+      const toks = tokenize(v);
+      expect(toks[0]?.type, `variant ${v}`).toBe("PROGRAM");
+    }
+  });
+
+  it("matches in/out case-insensitively", () => {
+    for (const v of ["in/out", "IN/OUT", "In/Out", "in/OUT"]) {
+      const toks = tokenize(v);
+      expect(toks[0]?.type, `variant ${v}`).toBe("INOUT");
+    }
+  });
+
+  it("matches boolean literals case-insensitively", () => {
+    for (const v of ["true", "TRUE", "True"]) {
+      const toks = tokenize(v);
+      expect(toks[0]?.type, `variant ${v}`).toBe("TRUE_LIT");
+    }
+  });
+
+  it("keeps plain identifiers case-sensitive", () => {
+    // Only reserved words are case-insensitive; "Total" and "total" must
+    // remain two distinct identifiers.
+    const toks = tokenize("Total total");
+    expect(toks[0]).toMatchObject({ type: "IDENT", literal: "Total" });
+    expect(toks[1]).toMatchObject({ type: "IDENT", literal: "total" });
+  });
 });

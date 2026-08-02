@@ -1,22 +1,22 @@
 export const DEFAULT_PROGRAM = `-- Welcome to PseudoGo! Edit this, then click Run (or press Ctrl/Cmd+Enter).
 
-function factorial(n: Integer) -> Integer
-Dictionary
-Algorithm
+FUNCTION factorial(n: INTEGER) -> INTEGER
+DICTIONARY
+ALGORITHM
 	IF n <= 1 THEN
-		return 1
+		RETURN 1
 	ENDIF
-	return n * factorial(n - 1)
-Endfunction
+	RETURN n * factorial(n - 1)
+ENDFUNCTION
 
-Program Main
-Dictionary
-	name: String
-	n: Integer
-Algorithm
+PROGRAM Main
+DICTIONARY
+	name: STRING
+	n: INTEGER
+ALGORITHM
 	INPUT name
 	OUTPUT "Hello,", name
 	n = 5
 	OUTPUT n, "factorial is", factorial(n)
-Endprogram
+ENDPROGRAM
 `;

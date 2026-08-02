@@ -1,7 +1,7 @@
-procedure bubbleSort(in/out arr: Array[1..1000] of Integer, in n: Integer)
-Dictionary
-	i, j, temp: Integer
-Algorithm
+PROCEDURE bubbleSort(IN/OUT arr: ARRAY[1..1000] OF INTEGER, IN n: INTEGER)
+DICTIONARY
+	i, j, temp: INTEGER
+ALGORITHM
 	FOR i = 1 TO n - 1
 		FOR j = 1 TO n - i
 			IF arr[j] > arr[j + 1] THEN
@@ -11,14 +11,14 @@ Algorithm
 			ENDIF
 		ENDFOR
 	ENDFOR
-Endprocedure
+ENDPROCEDURE
 
-Program SortDemo
-Dictionary
-	data: Array[1..1000] of Integer
-	i: Integer
-	seed: Integer
-Algorithm
+PROGRAM SortDemo
+DICTIONARY
+	data: ARRAY[1..1000] OF INTEGER
+	i: INTEGER
+	seed: INTEGER
+ALGORITHM
 	seed = 12345
 	FOR i = 1 TO 1000
 		seed = (seed * 1103515245 + 12345) MOD 2147483647
@@ -37,4 +37,4 @@ Algorithm
 		ENDIF
 	ENDFOR
 	OUTPUT 1
-Endprogram
+ENDPROGRAM
