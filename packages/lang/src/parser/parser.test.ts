@@ -92,7 +92,7 @@ Endprogram
     const inner = outer.elem as ast.ArrayType;
     expect(inner.lower).toBe(1);
     expect(inner.upper).toBe(5);
-    expect(inner.elem).toMatchObject({ kind: "PrimitiveType", name: "Real" });
+    expect(inner.elem).toMatchObject({ kind: "PrimitiveType", name: "REAL" });
   });
 
   it("parses a struct definition", () => {
@@ -204,6 +204,22 @@ Algorithm
 Endprogram
 `;
     expect(() => parseSrc(src)).toThrow();
+  });
+
+  it("matches primitive type names case-insensitively, canonicalized to uppercase", () => {
+    for (const spelling of ["Integer", "INTEGER", "integer", "InTeGeR"]) {
+      const src = `
+Program Main
+Dictionary
+	x: ${spelling}
+Algorithm
+	x = 5
+Endprogram
+`;
+      const file = parseSrc(src);
+      const decl = file.program.locals[0]!;
+      expect(decl.type, `spelling ${spelling}`).toMatchObject({ kind: "PrimitiveType", name: "INTEGER" });
+    }
   });
 
   it("distinguishes a call statement from an assignment", () => {

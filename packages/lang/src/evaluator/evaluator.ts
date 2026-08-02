@@ -199,7 +199,7 @@ class Evaluator {
     const primName = t?.kind === "PrimitiveType" ? t.name : undefined;
     let val: Value;
     switch (primName) {
-      case "Integer": {
+      case "INTEGER": {
         const trimmed = raw.trim();
         if (!/^[+-]?\d+$/.test(trimmed)) {
           throw new PseudoError("Runtime error", n.line, `Invalid input '${raw}': expected an Integer`);
@@ -207,7 +207,7 @@ class Evaluator {
         val = intVal(Number(trimmed));
         break;
       }
-      case "Real": {
+      case "REAL": {
         const trimmed = raw.trim();
         const f = Number(trimmed);
         if (trimmed === "" || Number.isNaN(f)) {
@@ -216,14 +216,14 @@ class Evaluator {
         val = realVal(f);
         break;
       }
-      case "Boolean": {
+      case "BOOLEAN": {
         const trimmed = raw.trim();
         if (trimmed === "true") val = boolVal(true);
         else if (trimmed === "false") val = boolVal(false);
         else throw new PseudoError("Runtime error", n.line, `Invalid input '${raw}': expected 'true' or 'false'`);
         break;
       }
-      case "Char": {
+      case "CHAR": {
         const trimmed = raw.trim();
         if ([...trimmed].length !== 1) {
           throw new PseudoError("Runtime error", n.line, `Invalid input '${raw}': expected a single character`);
@@ -565,7 +565,7 @@ function valuesEqual(l: Value, r: Value): boolean {
 /** Applies Integer -> Real widening when storing an Integer value into a
  * Real-typed slot, leaving all other values unchanged. */
 function coerce(v: Value, target: ast.TypeExpr | undefined): Value {
-  if (target?.kind === "PrimitiveType" && target.name === "Real" && v.kind === "Integer") {
+  if (target?.kind === "PrimitiveType" && target.name === "REAL" && v.kind === "Integer") {
     return realVal(v.v);
   }
   return v;

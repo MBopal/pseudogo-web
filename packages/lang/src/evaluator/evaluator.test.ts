@@ -455,4 +455,38 @@ Endprogram
     expect(events).toBeGreaterThan(0);
     expect(events).toBeLessThanOrEqual(6);
   });
+
+  it("runs identically regardless of keyword/type-name casing", () => {
+    // Canonical casing (uppercase keywords/types, lowercase true/false) is
+    // the recommended style, not a requirement -- either way the program
+    // must behave identically.
+    const lower = `
+program Main
+dictionary
+	n: integer
+	flag: boolean
+algorithm
+	n = 5
+	flag = TRUE
+	if flag AND n > 0 then
+		output n * 2
+	endif
+endprogram
+`;
+    const canonical = `
+PROGRAM Main
+DICTIONARY
+	n: INTEGER
+	flag: BOOLEAN
+ALGORITHM
+	n = 5
+	flag = true
+	IF flag AND n > 0 THEN
+		OUTPUT n * 2
+	ENDIF
+ENDPROGRAM
+`;
+    expectOutput(lower, "10\n");
+    expectOutput(canonical, "10\n");
+  });
 });

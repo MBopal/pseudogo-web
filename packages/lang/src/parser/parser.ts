@@ -13,7 +13,17 @@ import * as ast from "../ast/ast.js";
 import { PseudoError } from "../errors/errors.js";
 import { type Token, type TokenType, displayTokenType } from "../token/token.js";
 
-const PRIMITIVE_NAMES = new Set(["Integer", "Real", "Boolean", "Char", "String"]);
+// Primitive type names are matched case-insensitively (like every other
+// keyword); the map value is the canonical (uppercase) spelling used in the
+// AST regardless of how the programmer wrote it. Struct/function/procedure/
+// variable names are unaffected -- only these five reserved type names.
+const PRIMITIVE_TYPE_NAMES: Record<string, ast.PrimitiveType["name"]> = {
+  integer: "INTEGER",
+  real: "REAL",
+  boolean: "BOOLEAN",
+  char: "CHAR",
+  string: "STRING",
+};
 
 function describeTok(t: Token): string {
   if (t.type === "EOF") return "end of file";
@@ -133,8 +143,9 @@ class Parser {
     if (this.curType() === "IDENT") {
       const name = this.cur.literal;
       this.advance();
-      if (PRIMITIVE_NAMES.has(name)) {
-        return { kind: "PrimitiveType", name: name as ast.PrimitiveType["name"], line };
+      const canonical = PRIMITIVE_TYPE_NAMES[name.toLowerCase()];
+      if (canonical !== undefined) {
+        return { kind: "PrimitiveType", name: canonical, line };
       }
       return { kind: "StructType", name, line };
     }

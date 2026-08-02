@@ -51,7 +51,7 @@ Algorithm
 	y = "hello"
 Endprogram
 `,
-      "Cannot assign String to Integer",
+      "Cannot assign STRING to INTEGER",
     );
   });
 
