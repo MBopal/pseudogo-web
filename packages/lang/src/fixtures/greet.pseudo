@@ -1,7 +1,7 @@
-Program Greet
-Dictionary
-	name: String
-Algorithm
+PROGRAM Greet
+DICTIONARY
+	name: STRING
+ALGORITHM
 	INPUT name
 	OUTPUT "Hello,", name
-Endprogram
+ENDPROGRAM

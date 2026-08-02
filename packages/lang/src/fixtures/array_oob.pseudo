@@ -1,8 +1,8 @@
-Program ArrayOOB
-Dictionary
-	arr: Array[1..10] of Integer
-	x: Integer
-Algorithm
+PROGRAM ArrayOOB
+DICTIONARY
+	arr: ARRAY[1..10] OF INTEGER
+	x: INTEGER
+ALGORITHM
 	x = arr[0]
 	OUTPUT x
-Endprogram
+ENDPROGRAM
